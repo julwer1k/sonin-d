@@ -14,7 +14,7 @@ export const Greeting = () => {
 					segments: [
 						{ type: 'text', content: 'HAPPY BIRTHDAY — СЕГОДНЯ', prefilled: true, visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'ТВОЙ ДЕНЬ, ТЫ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'СИЯЕШЬ', video: '/greeting/video-1.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'СИЯЕШЬ', video: '/greeting/video-1-small.mp4', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'ЯРЧЕ, ЧЕМ ГОРОД НОЧЬЮ. ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
@@ -23,13 +23,13 @@ export const Greeting = () => {
 						{ type: 'text', content: 'С тобой любой момент —', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'УЖЕ', visibleOn: ['mobile', 'desktop'] },
 
-						{ type: 'button', content: 'ЛОВСТОРИ', video: '/greeting/video-2.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ЛОВСТОРИ', video: '/greeting/video-2-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
 						{ type: 'text', content: 'и даже Холод', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ТАЕТ', video: '/greeting/video-3.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ТАЕТ', video: '/greeting/video-3-small.mp4', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'от твоей истории.', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
@@ -37,27 +37,27 @@ export const Greeting = () => {
 					segments: [
 						{ type: 'text', content: 'Твоё настроение — мой', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'лучший', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ПЛЕЙЛИСТ', video: '/greeting/video-4.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ПЛЕЙЛИСТ', video: '/greeting/video-4-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
 						{ type: 'text', content: 'мы с тобой один', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'САЛАТМИКС', video: '/greeting/video-5.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'САЛАТМИКС', video: '/greeting/video-5-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
 						{ type: 'text', content: 'С тобой я глупышка,', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'но шарю за', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'TEMU', video: '/greeting/video-6.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'TEMU', video: '/greeting/video-6-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
 						{ type: 'text', content: 'Пиздюкать просто ВЕДЬ', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'МЫ в  одной', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ТЕМЕ', video: '/greeting/video-7.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ТЕМЕ', video: '/greeting/video-7-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
@@ -70,22 +70,44 @@ export const Greeting = () => {
 					segments: [
 						{ type: 'text', content: 'в нашем фильме ты — ', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'мой', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'HAPPY END', video: '/greeting/video-8.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'HAPPY END', video: '/greeting/video-8-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
 						{ type: 'text', content: 'С днюхой, Даша —', visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'мой КАПРИЗНЫЙ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'СВЕТ', video: '/greeting/video-9.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'СВЕТ', video: '/greeting/video-9-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 			],
 		},
 	], []);
 
+	const videoSources = useMemo(
+		() =>
+			blocks[0].lines
+				.flatMap((line) => line.segments)
+				.filter((seg) => seg.type === 'button' && seg.video)
+				.map((seg) => seg.video),
+		[blocks]
+	);
+
 	return (
 		<div className="relative">
+			<div aria-hidden="true">
+				{videoSources.map((src) => (
+					<video
+						key={src}
+						src={src}
+						preload="auto"
+						muted
+						playsInline
+						className="fixed w-0 h-0 opacity-0 pointer-events-none"
+					/>
+				))}
+			</div>
+
 			<Image
 				src="/words/background.png"
 				alt="background image"
