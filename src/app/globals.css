@@ -1,26 +1,199 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-manrope: var(--font-manrope);
+  --font-druk: var(--font-druk);
+  --marquee-duration: 30s; /* fallback, потом JS будет обновлять значение */
+  --maskW: 0%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+@layer utilities {
+  .bant:after {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 90%;
+    right: -10px;
+    top: -3px;
+    rotate: 53deg;
+    width: 41px;
+    height: 25px;
+    background: url("/hero/scotch.png") no-repeat center / contain;
+    pointer-events: none;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @screen xs {
+    .bant:after {
+      top: -3px;
+      width: clamp(41px,12.81vw,50px);
+      height: clamp(25px,7.81vw,30px);
+    }
+  }
+
+  @screen s {
+    .bant:after {
+      top: -3px;
+      width: clamp(50px,12.82vw,81px);
+      height: clamp(30px,7.69vw,50px);
+    }
+  }
+
+  @screen sm {
+    .bant:after {
+      top: -5px;
+      right: -20px;
+    }
+  }
+
+  .blend-box { position: relative; isolation: isolate; }
+  .blend-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/hero/title-name.svg") center/contain no-repeat;
+    mix-blend-mode: soft-light;   /* именно тут */
+    opacity: .6;                  /* вместо opacity на родителе */
+    pointer-events: none;
+    z-index: 1;                   /* ниже контура */
+  }
+
+  .full-bleed {
+    position: relative;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    max-width: none;
+  }
+
+  @media (min-width: 640px) {
+    .full-bleed {
+      left: auto;
+      right: auto;
+      margin-left: auto;
+      margin-right: auto;
+      width: 640px;
+      max-width: 640px;
+    }
+  }
+
+  .center-ticket {
+    position: relative;
+  }
+
+  .center-ticket:before {
+    transform: translate(-50%);
+    right: -20%;
+    top: -30%;
+    content: "RD";
+    position: absolute;
+    font-size: 6px;
+    font-family: var(--font-druk);
+    font-weight: 500;
+    width: 12px;
+    height: 5px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @screen xs {
+    .center-ticket:before {
+      font-size: clamp(6px,1.88vw,7px);
+      width: clamp(12px,3.75vw,15px);
+      height: clamp(5px,1.56vw,6px);
+    }
+  }
+
+  @screen s {
+    .center-ticket:before {
+      font-size: clamp(7px,1.79vw,12px);
+      width: clamp(15px,3.85vw,24px);
+      height: clamp(6px,1.54vw,10px);
+    }
+  }
+
+  @keyframes spinAround {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg) scale(1) skew(0deg, 0deg) translateX(0);
+      filter: brightness(1);
+    }
+
+    10% {
+      transform: translate(-50%, -50%) rotate(40deg) scale(1.05) skew(1deg, -1deg) translateX(2%);
+    }
+
+    20% {
+      transform: translate(-50%, -50%) rotate(90deg) scale(0.97) skew(-2deg, 1deg) translateX(-1%);
+    }
+
+    /* движение назад */
+    30% {
+      transform: translate(-50%, -50%) rotate(60deg) scale(1.03) skew(1deg, 2deg) translateX(3%);
+    }
+
+    40% {
+      transform: translate(-50%, -50%) rotate(120deg) scale(0.98) skew(-1deg, -2deg) translateX(-2%);
+      filter: brightness(1.08);
+    }
+
+    /* ускорение */
+    55% {
+      transform: translate(-50%, -50%) rotate(200deg) scale(1.06) skew(1deg, -1deg) translateX(1%);
+    }
+
+    /* разворот назад */
+    70% {
+      transform: translate(-50%, -50%) rotate(150deg) scale(0.94) skew(-2deg, 2deg) translateX(-3%);
+    }
+
+    85% {
+      transform: translate(-50%, -50%) rotate(330deg) scale(1.02) skew(1deg, 1deg) translateX(1%);
+      filter: brightness(1.12);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg) scale(1) skew(0deg, 0deg) translateX(0);
+      filter: brightness(1);
+    }
+  }
+
+  .mobile-media-slider .swiper-slide {
+    transition: filter 220ms ease, transform 220ms ease, opacity 220ms ease;
+  }
+
+  .mobile-media-slider .swiper-slide:not(.swiper-slide-active) {
+    filter: blur(5px) brightness(0.9);
+    opacity: 0.7;
+    transform: scale(0.92);
+  }
+
+  .mobile-media-slider .swiper-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .tinder-sticker:before {
+    transform: translate(-50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 2px;
+    background: url("/tinder/sticker.png") no-repeat center / contain;
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
