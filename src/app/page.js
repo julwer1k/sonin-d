@@ -23,7 +23,7 @@ export default function Home() {
 					priority
 					className="pointer-events-none
             absolute inset-0 z-[11]
-            object-cover opacity-10 mix-blend-screen
+            object-cover opacity-20 mix-blend-screen
             xs:w-[clamp(320px,100vw,390px)]
             s:w-[clamp(390px,100vw,640px)]
             xs:min-h-[clamp(878px,274.38vw,1070px)]

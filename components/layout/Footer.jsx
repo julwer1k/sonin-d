@@ -252,6 +252,7 @@ export const Footer = () => {
 				<Image
 					src="/footer/sticker.gif"
 					alt="paper image"
+					unoptimized
 					width={512}
 					height={512}
 					priority

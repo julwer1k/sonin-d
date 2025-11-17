@@ -6,7 +6,7 @@ import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export const Greeting = () => {
-	const [videoActive, setVideoActive] = useState(false);
+	const [videoActive, setVideoActive] = useState(null);
 	const blocks = useMemo(() => [
 		{
 			lines: [
@@ -86,10 +86,14 @@ export const Greeting = () => {
 
 	const videoSources = useMemo(
 		() =>
-			blocks[0].lines
-				.flatMap((line) => line.segments)
-				.filter((seg) => seg.type === 'button' && seg.video)
-				.map((seg) => seg.video),
+			Array.from(
+				new Set(
+					blocks[0].lines
+						.flatMap((line) => line.segments)
+						.filter((seg) => seg.type === 'button' && seg.video)
+						.map((seg) => seg.video),
+				)
+			),
 		[blocks]
 	);
 
@@ -135,17 +139,21 @@ export const Greeting = () => {
 					s:pb-[clamp(80px,20.51vw,130px)]"
 			>
 
-				<motion.video
-					src={videoActive || null}
-					className="absolute inset-0 z-[0] w-full h-full object-cover pointer-events-none"
-					autoPlay
-					muted={!videoActive}
-					loop
-					playsInline
-					initial={false}
-					animate={{ opacity: videoActive ? 1.0 : 0 }}
-					transition={{ duration: 0.25 }}
-				/>
+				{videoActive && (
+					<motion.video
+						key={`${videoActive}`}
+						src={videoActive}
+						preload="auto"
+						autoPlay
+						loop
+						playsInline
+						className="absolute inset-0 z-[0] w-full h-full object-cover pointer-events-none"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.1 }}
+					/>
+				)}
 
 				<motion.div
 					className="relative z-[2]"

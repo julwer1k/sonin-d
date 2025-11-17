@@ -1,5 +1,4 @@
 import MobileMediaSlider from '@components/MobileMediaSlider';
-import Image from 'next/image';
 import React from 'react';
 
 export const Memory = () => {
