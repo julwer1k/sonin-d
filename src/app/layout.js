@@ -20,14 +20,6 @@ export const poppinsFont = Poppins({
   variable: '--font-poppins',
   display: 'swap',
 });
-export const drukFont = localFont({
-  src: [
-    { path: '../../fonts/DrukWide-Medium-Trial.otf', weight: '500', style: 'normal' },
-    { path: '../../fonts/DrukWide-Bold-Trial.otf', weight: '700', style: 'normal' },
-  ],
-  variable: '--font-druk',
-  display: 'swap',
-});
 export const eUkraineFont = localFont({
   src: [
     { path: '../../fonts/e-Ukraine-Light.otf', weight: '300', style: 'normal' },
@@ -36,6 +28,30 @@ export const eUkraineFont = localFont({
     { path: '../../fonts/e-Ukraine-Bold.otf', weight: '700', style: 'normal' },
   ],
   variable: '--font-eukraine',
+  display: 'swap',
+})
+
+export const krapkaFont = localFont({
+  src: [
+    { path: '../../fonts/DRKrapkaRound-Regular.ttf', weight: '400', style: 'normal' },
+  ],
+  variable: '--font-krapka',
+  display: 'swap',
+})
+
+export const karpatyFont = localFont({
+  src: [
+    { path: '../../fonts/KARPATY-Font.ttf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-kar',
+  display: 'swap',
+})
+
+export const quetismFont = localFont({
+  src: [
+    { path: '../../fonts/QuietismText-Italic.ttf', weight: '400', style: 'italic' },
+  ],
+  variable: '--font-quietism',
   display: 'swap',
 })
 
@@ -53,9 +69,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${manropeFont.variable} ${drukFont.variable} ${interFont.variable}  ${poppinsFont.variable} ${eUkraineFont.variable} scroll-smooth`}
+      className={`${manropeFont.variable}  ${interFont.variable}  ${poppinsFont.variable} ${karpatyFont.variable} ${eUkraineFont.variable} ${krapkaFont.variable} ${quetismFont.variable} scroll-smooth`}
     >
-      <body>
+      <body className="3xl:container 3xl:bg-[#9CC5FD]">
         {children}
       </body>
     </html>

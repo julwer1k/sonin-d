@@ -25,26 +25,18 @@ export default function ParallaxTextLine({
 	const animatableSegments = textSegments.filter((s) => s.type === 'text' && !s.prefilled);
 	const segCount = Math.max(animatableSegments.length, 1);
 
-	const textCls = `font-manrope font-extrabold align-middle uppercase
-		xs:h-[clamp(22px,6.88vw,28px)]
-		s:h-[clamp(28px,7.18vw,46px)]
-		
-		xs:leading-[clamp(22px,6.88vw,28px)]
-		s:leading-[clamp(28px,7.18vw,46px)]
+	const textCls = `font-eukraine font-bold align-middle uppercase text-[#2F2F2F]
+		xl:h-[clamp(21px,1.46vw,28px)]
+		xl:leading-[clamp(21px,1.46vw,28px)]
 	
-		xs:text-[clamp(20px,6.25vw,24px)]
-		s:text-[clamp(24px,6.15vw,40px)]`;
+		xl:text-[clamp(25.5px,1.77vw,34px)]`;
 
 	let animIndex = -1;
 
 	return (
 		<motion.div
 			className="bp:justify-center flex flex-wrap items-center
-				xs:gap-y-[clamp(2px,0.63vw,2px)]
-				s:gap-y-[clamp(2px,0.51vw,3px)]
-				xs:gap-x-[clamp(12px,3.75vw,15px)]
-				s:gap-x-[clamp(15px,3.85vw,24px)]
-				"
+				xl:gap-[clamp(10.5px,0.73vw,14px)]"
 			// ВАЖНО: MotionValue<string> с единицами — '%'
 			style={
 				/** @type {any} */ ({
@@ -57,6 +49,7 @@ export default function ParallaxTextLine({
 					return (
 						<ParallaxButton
 							key={i}
+							classnames={seg.classnames}
 							label={seg.content}
 							onHoverChange={(hovering) => onHoverChange?.(hovering ? seg.video : null)}
 							videoActive={videoActive}
@@ -68,7 +61,7 @@ export default function ParallaxTextLine({
 					return (
 						<span
 							key={i}
-							className={classNames(textCls, 'text-white', videoActive ? 'opacity-[0.1]' : 'opacity-100')}
+							className={classNames(textCls, 'text-[#2F2F2F]', seg.classnames, videoActive ? 'opacity-[0.1]' : 'opacity-100')}
 						>
               {formatInlineNumbers(seg.content, 'uk-UA')}
             </span>
@@ -85,7 +78,8 @@ export default function ParallaxTextLine({
 						key={i}
 						className={classNames(
 							textCls,
-							'text-transparent bg-clip-text',
+							'bg-clip-text',
+							seg.classnames,
 							videoActive ? 'opacity-[0.1]' : 'opacity-100',
 						)}
 						style={

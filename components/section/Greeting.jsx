@@ -1,9 +1,10 @@
 'use client';
 
 import ParallaxContainer from '@components/Greeting/ParallaxContainer';
-import Image from 'next/image';
+import classNames from 'classnames';
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const Greeting = () => {
 	const [videoActive, setVideoActive] = useState(null);
@@ -12,72 +13,64 @@ export const Greeting = () => {
 			lines: [
 				{
 					segments: [
-						{ type: 'text', content: 'HAPPY BIRTHDAY — СЕГОДНЯ', prefilled: true, visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'ТВОЙ ДЕНЬ, ТЫ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'СИЯЕШЬ', video: '/greeting/video-1-small.mp4', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'ЯРЧЕ, ЧЕМ ГОРОД НОЧЬЮ. ', visibleOn: ['mobile', 'desktop'] },
-					],
-				},
-				{
-					segments: [
-						{ type: 'text', content: 'С тобой любой момент —', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'УЖЕ', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'Сьогодні',  prefilled: true, visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(43.5px,3.02vw,58px)]' },
+						{ type: 'button', content: 'ТАТА', video: '/greeting/video-1.mp4', visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(165.75px,11.51vw,221px)]' },
 
-						{ type: 'button', content: 'ЛОВСТОРИ', video: '/greeting/video-2-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'МИ МІЦНО ОБІЙМАЄМО', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'и даже Холод', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ТАЕТ', video: '/greeting/video-3-small.mp4', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'от твоей истории.', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'І В СЕРЦІ СПРАВЖНЄ', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(18px,1.25vw,24px)] xl:mr-[clamp(195.75px,13.59vw,261px)]' },
+						{ type: 'button', content: 'СВЯТО', video: '/greeting/video-2.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'ВІДЧУВАЄМО', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'Твоё настроение — мой', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'лучший', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ПЛЕЙЛИСТ', video: '/greeting/video-4-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'ТИ ВМІЄШ', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'НАСТРІЙ', video: '/greeting/video-3.mp4', visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(248.25px,17.24vw,331px)]' },
+						{ type: 'text', content: 'НАМ ЗАВЖДИ ПІДНЯТИ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'мы с тобой один', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'САЛАТМИКС', video: '/greeting/video-5-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'І СВОЄ ЧОЛОВІЧЕ', visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(225.75px,15.68vw,301px)] xl:ml-[clamp(54px,3.75vw,72px)]' },
+						{ type: 'button', content: 'СЛОВО', video: '/greeting/photo-1.jpg', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'ТРИМАТИ', visibleOn: ['mobile', 'desktop'] },
+					],
+				},
+			],
+		},
+		{
+			lines: [
+				{
+					segments: [
+						{ type: 'text', content: 'ТИ ДЛЯ НАС ЯК', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(109.5px,7.6vw,146px)] xl:mr-[clamp(247.5px,17.19vw,330px)]' },
+						{ type: 'button', content: 'ПРИКЛАД', video: '/greeting/video-1-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'СИЛИ Й ВОЛІ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'С тобой я глупышка,', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'но шарю за', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'TEMU', video: '/greeting/video-6-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'І ГОЛОВНИЙ', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ГЕРОЙ', video: '/greeting/video-2-small.mp4', visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(277.5px,19.27vw,370px)]' },
+
+						{ type: 'text', content: 'У НАШІЙ ДОЛІ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'Пиздюкать просто ВЕДЬ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'МЫ в  одной', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ТЕМЕ', video: '/greeting/video-7-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'МИ БУДЕМО', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(143.25px,9.95vw,191px)] xl:mr-[clamp(262.5px,18.23vw,350px)]' },
+						{ type: 'button', content: 'ПОРУЧ', video: '/greeting/video-3-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'З ТОБОЮ ЙТИ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 				{
 					segments: [
-						{ type: 'text', content: 'Твой смех звучит, ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'как любимый тренд,', visibleOn: ['mobile', 'desktop'] },
-					],
-				},
-				{
-					segments: [
-						{ type: 'text', content: 'в нашем фильме ты — ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'мой', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'HAPPY END', video: '/greeting/video-8-small.mp4', visibleOn: ['mobile', 'desktop'] },
-					],
-				},
-				{
-					segments: [
-						{ type: 'text', content: 'С днюхой, Даша —', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'text', content: 'мой КАПРИЗНЫЙ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'СВЕТ', video: '/greeting/video-9-small.mp4', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'text', content: 'БО НАЙКРАЩИЙ ', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(69.75px,4.84vw,93px)] xl:mr-[clamp(292.5px,20.31vw,390px)]' },
+						{ type: 'text', content: 'У СВІТІ — ЦЕ', visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ТИ', video: '/greeting/video-4-small.mp4', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 			],
@@ -112,31 +105,8 @@ export const Greeting = () => {
 				))}
 			</div>
 
-			<Image
-				src="/words/background.png"
-				alt="background image"
-				fill
-				priority
-				className="absolute inset-0 z-[0] object-cover opacity-40 mix-blend-screen pointer-events-none"
-			/>
-
-			<Image
-				src="/words/paper-top.png"
-				alt="Paper Top"
-				width={640}
-				height={884}
-				priority
-				className="absolute xs:top-[-10px] sm:top-0 sm:inset-0 z-[0] object-cover pointer-events-none"
-			/>
-
 			<section
-				className="relative z-[1] w-full text-white overflow-hidden
-					xs:mt-[clamp(55px,17.19vw,70px)]
-					s:mt-[clamp(70px,17.95vw,112px)]
-					xs:px-[clamp(15px,4.69vw,18px)]
-					s:px-[clamp(18px,4.62vw,30px)]
-					xs:pb-[clamp(65px,20.31vw,80px)]
-					s:pb-[clamp(80px,20.51vw,130px)]"
+				className="relative z-[1] w-full bg-[#F9FDEC] text-[#2F2F2F] overflow-hidden h-full xl:px-[20px] 2xl:px-[30px] xl:py-[clamp(48px,3.33vw,64px)]"
 			>
 
 				{videoActive && (
@@ -155,6 +125,25 @@ export const Greeting = () => {
 					/>
 				)}
 
+				<p className="font-karpaty font-bold xl:text-[clamp(38px,2.64vw,50px)] mx-auto xl:w-[clamp(750px,52.08vw,1000px)]">НАРРУ</p>
+
+				<Image
+					src="/greeting/title.png"
+					alt="title"
+					width={1000}
+					height={207}
+					className="mx-auto xl:w-[clamp(750px,52.08vw,1000px)] xl:h-[clamp(155.25px,10.78vw,207px)]"
+				/>
+
+				{/* Ваше зображення елемента з Фігми */}
+				<Image
+					src="/greeting/element.png"
+					alt="element"
+					width={366}
+					height={923}
+					className={classNames(`absolute left-[45%] -translate-x-1/2 top-[39px] z-[1] xl:w-[clamp(274.5px,19.06vw,366px)] xl:h-[clamp(692.25px,48.07vw,923px)] pointer-events-none ${videoActive && 'opacity-0'}`)}
+				/>
+
 				<motion.div
 					className="relative z-[2]"
 				>
@@ -167,12 +156,11 @@ export const Greeting = () => {
 			</section>
 
 			<Image
-				src="/words/paper-bottom.png"
-				alt="Paper bottom"
-				width={640}
-				height={884}
-				priority
-				className="absolute z-[0] bottom-0 object-cover pointer-events-none"
+				src="/line.svg"
+				alt="line"
+				width={1920}
+				height={574}
+				className="absolute z-[2] top-[89%]"
 			/>
 		</div>
 	);

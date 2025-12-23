@@ -38,7 +38,8 @@ export default function ParallaxContainer({
 		<motion.section
 			ref={ref}
 			className={classNames(
-				`flex flex-col relative w-max s:ml-[0px]`,
+				`relative xl:left-[clamp(216px,15vw,276px)] 2xl:left-[clamp(276px,14.38vw,306px)] flex flex-col w-max 
+				xl:mt-[clamp(48px,3.33vw,64px)] xl:gap-[clamp(52.5px,3.65vw,70px)]`,
 				className,
 			)}
 		>

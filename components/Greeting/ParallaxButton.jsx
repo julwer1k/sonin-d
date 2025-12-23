@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-export default function ParallaxButton({ label, onHoverChange, videoActive }) {
+export default function ParallaxButton({ label, onHoverChange, videoActive, classnames }) {
 	return (
 		<motion.button
 			type="button"
@@ -15,21 +15,13 @@ export default function ParallaxButton({ label, onHoverChange, videoActive }) {
 			whileTap={{ scale: 0.96 }}
 			transition={{ type: 'spring', stiffness: 500, damping: 30 }}
 			className={classNames(
-				`rounded-full border border-[#F6F6F6] text-white font-manrope font-medium  hover:bg-white hover:text-black transition-colors 
-					xs:px-[clamp(15px,4.69vw,19px)]
-					s:px-[clamp(19px,4.87vw,30px)]
-					
-					xs:py-[clamp(2px,0.63vw,3px)]
-					s:py-[clamp(3px,0.77vw,4px)]
-					
-					xs:min-h-[clamp(28px,8.75vw,35px)]
-					s:min-h-[clamp(35px,8.97vw,56px)]
-
-					xs:min-w-[clamp(86px,26.88vw,105px)]
-					s:min-w-[clamp(105px,26.92vw,172px)]
-					
-					xs:text-[clamp(6px,1.88vw,7px)]
-					s:text-[clamp(7px,1.79vw,12px)]`,
+				`rounded-[48px] border border-[#2F2F2F] text-[#2F2F2F] font-eukraine font-medium  hover:bg-white hover:text-[#2F2F2F] transition-colors 
+					xl:py-[12px]
+					xl:px-[clamp(3px,0.21vw,4px)]
+					xl:min-h-[clamp(42px,2.92vw,56px)]
+					xl:min-w-[clamp(130px,9.03vw,172px)]
+					xl:text-[clamp(9px,0.63vw,12px)]`,
+				classnames,
 				videoActive && 'opacity-100',
 			)}
 		>

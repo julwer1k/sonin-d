@@ -1,5 +1,5 @@
 {
-  "name": "podarok",
+  "name": "egorS",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,11 +12,12 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.23.24",
+    "framer-motion": "^12.23.26",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "swiper": "^12.0.3"
+    "swiper": "^12.0.3",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",

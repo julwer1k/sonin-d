@@ -1,207 +1,288 @@
-import MobileMediaSlider from '@components/MobileMediaSlider';
-import React from 'react';
+'use client';
+
+import { FolderSVG } from '@components/FolderSVG';
+import classNames from 'classnames';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, EffectCards, Keyboard } from 'swiper/modules';
+import Image from 'next/image';
+import clsx from 'clsx';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-cards';
+
+// Константи кольорів
+const COLORS = {
+	DEFAULT: '#2C2C2C', // Чорний
+	ACTIVE: '#FFB685',  // Помаранчевий
+	TEXT: '#F9FDEC',    // Світлий текст
+};
+
+const FOLDERS_DATA = [
+	{
+		id: 'relax',
+		title: 'ВІДПОЧИНОК',
+		// color прибрали звідси, бо він тепер динамічний
+		zIndex: 30,
+		tabPosition: 'left',
+		tabCoordinats: 'left-[17%] bottom-[4%]',
+		media: [
+			{ type: 'photo', url: '/memory/trip-1.jpg' },
+			{ type: 'photo', url: '/memory/trip-2.jpg' },
+			{ type: 'photo', url: '/memory/trip-3.jpg' },
+			{ type: 'photo', url: '/memory/trip-4.jpg' },
+			{ type: 'photo', url: '/memory/trip-5.jpg' },
+			{ type: 'photo', url: '/memory/trip-6.jpg' },
+			{ type: 'photo', url: '/memory/trip-7.jpg' },
+			{ type: 'photo', url: '/memory/trip-8.jpg' },
+			{ type: 'photo', url: '/memory/trip-9.jpg' },
+			{ type: 'photo', url: '/memory/trip-10.jpg' },
+			{ type: 'photo', url: '/memory/trip-11.jpg' },
+			{ type: 'photo', url: '/memory/trip-12.jpg' },
+			{ type: 'photo', url: '/memory/trip-13.jpg' },
+			{ type: 'photo', url: '/memory/trip-14.jpg' },
+			{ type: 'photo', url: '/memory/trip-15.jpg' },
+			{ type: 'photo', url: '/memory/trip-16.jpg' },
+			{ type: 'photo', url: '/memory/trip-17.jpg' },
+			{ type: 'photo', url: '/memory/trip-18.jpg' },
+			{ type: 'photo', url: '/memory/trip-19.jpg' },
+			{ type: 'photo', url: '/memory/trip-20.jpg' },
+		]
+	},
+	{
+		id: 'childhood',
+		title: 'ДИТИНСТВО',
+		zIndex: 20,
+		tabPosition: 'right',
+		tabCoordinats: 'left-[54%] bottom-[4%]',
+		media: [
+			{ type: 'photo', url: '/memory/kid-1.png' },
+			{ type: 'photo', url: '/memory/kid-2.png' },
+			{ type: 'photo', url: '/memory/kid-3.png' },
+			{ type: 'photo', url: '/memory/kid-4.png' },
+			{ type: 'photo', url: '/memory/kid-5.png' },
+			{ type: 'photo', url: '/memory/kid-6.png' },
+			{ type: 'photo', url: '/memory/kid-7.png' },
+			{ type: 'photo', url: '/memory/kid-8.png' },
+			{ type: 'photo', url: '/memory/kid-9.png' },
+			{ type: 'photo', url: '/memory/kid-10.png' },
+			{ type: 'photo', url: '/memory/kid-11.png' },
+			{ type: 'photo', url: '/memory/kid-12.png' },
+			{ type: 'photo', url: '/memory/kid-13.png' },
+		]
+	},
+	{
+		id: 'family',
+		title: 'РОДИНА',
+		zIndex: 10,
+		tabPosition: 'left',
+		tabCoordinats: 'left-[21%] bottom-[4%]',
+		media: [
+			{ type: 'photo', url: '/memory/family-1.jpg' },
+			{ type: 'photo', url: '/memory/family-2.jpg' },
+			{ type: 'photo', url: '/memory/family-3.jpg' },
+			{ type: 'photo', url: '/memory/family-4.jpg' },
+			{ type: 'photo', url: '/memory/family-5.jpg' },
+			{ type: 'photo', url: '/memory/family-6.jpg' },
+			{ type: 'photo', url: '/memory/family-7.jpg' },
+			{ type: 'photo', url: '/memory/family-8.jpg' },
+		]
+	},
+];
 
 export const Memory = () => {
-	const files = [
-		{
-			id: 0,
-			url: '/memory/vertical-1.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 1,
-			url: '/memory/video-1.mp4',
-			type: 'video',
-			orientation: 'vertical',
-		},
-		{
-			id: 2,
-			url: '/memory/vertical-2.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 3,
-			url: '/memory/vertical-3.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 4,
-			url: '/memory/vertical-4.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 5,
-			url: '/memory/vertical-5.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 6,
-			url: '/memory/vertical-6.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 7,
-			url: '/memory/horizontal-1.png',
-			type: 'photo',
-			orientation: 'horizontal',
-		},
-		{
-			id: 8,
-			url: '/memory/horizontal-2.jpg',
-			type: 'photo',
-			orientation: 'horizontal',
-		},
-		{
-			id: 9,
-			url: '/memory/horizontal-3.jpg',
-			type: 'photo',
-			orientation: 'horizontal',
-		},
-		{
-			id: 10,
-			url: '/memory/vertical-7.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-		{
-			id: 11,
-			url: '/memory/vertical-8.jpg',
-			type: 'photo',
-			orientation: 'vertical',
-		},
-	];
+	const [selectedId, setSelectedId] = useState(null); // Для модалки
+	const [activeId, setActiveId] = useState('childhood');
 
+	const selectedFolder = FOLDERS_DATA.find(f => f.id === selectedId);
+
+	const handleClose = () => {
+		setSelectedId(null);
+		// При закритті активна папка залишається активною (помаранчевою),
+		// або можна скидати activeId, якщо треба.
+		// Зараз логіка така: остання відкрита залишається помаранчевою.
+	};
+
+	const handleFolderClick = (id) => {
+		setActiveId(id); // Робимо помаранчевою
+		setSelectedId(id); // Відкриваємо модалку
+	};
 
 	return (
-		<section
-			className="relative
-				xs:pb-[clamp(100px,31.25vw,100px)]
-				s:pb-[clamp(100px,25.64vw,170px)]
-				bg-background isolate overflow-y-hidden
-				xs:pt-[clamp(48px,15vw,59px)]
-				s:pt-[clamp(59px,15.13vw,96px)]"
-		>
+		<section className="relative bg-[#F9FDEC] overflow-hidden py-[100px] ">
 
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="450"
-				height="56"
-				fill="none"
-				viewBox="0 0 450 56"
-				className="opacity-80
-					relative
-					xs:left-[clamp(80px,25vw,98px)]
-					s:left-[clamp(98px,25.13vw,160px)]
-					xs:w-[clamp(225px,70.31vw,274px)]
-					s:w-[clamp(274px,70.26vw,450px)] h-auto"
-			>
-				<g
-					fill="#95C62A"
-				>
-					<path
-						d="M0 55.125V.875h22.993l15.541 33.76L54.431.875h21.857v54.25H59.682V20.49L43.857 55.125h-11.78L16.321 20.49v34.635H0ZM88.776.875h50.599v12.469h-33.78v7.875h32.715v12.906h-32.715v8.385h34.206v12.615H88.776V.875ZM151.01 55.125V.875h22.993l15.541 33.76L205.44.875h21.858v54.25h-16.606V20.49l-15.825 34.635h-11.781L167.332 20.49v34.635H151.01ZM270.301 0h3.194c26.47 0 32.857 15.24 32.857 26.76v2.188c0 11.375-6.316 27.052-32.857 27.052h-3.194c-26.47 0-32.857-15.677-32.857-27.052V26.76c0-11.52 6.387-26.76 32.857-26.76Zm18.38 27.344c0-5.907-2.696-13.782-16.748-13.782-14.122 0-16.818 7.876-16.818 13.782v.948c0 5.833 2.98 14 16.818 14 14.052 0 16.748-8.167 16.748-14v-.948ZM333.465 13.854v10.281h19.941c5.464 0 6.813-2.406 6.813-5.177v-.145c0-2.625-1.349-4.959-6.813-4.959h-19.941Zm32.928 15.167c7.025 1.385 11.922 5.323 11.922 13.49v7.072c0 3.427.355 4.375.851 5.177v.365h-17.528c-.213-.365-.426-1.313-.426-3.573v-4.52c0-7-2.484-9.553-9.935-9.553h-17.812v17.646h-16.961V.875h39.173c19.728 0 22.212 8.167 22.212 14.656v.656c0 7.22-5.181 11.448-11.496 12.834ZM407.066 55.125V35.51L380.17.875h20.793l15.186 20.344L431.407.875H450l-26.044 34.708v19.542h-16.89Z"
-					/>
-				</g>
-			</svg>
-
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="541"
-				height="54"
-				viewBox="0 0 541 54"
-				fill="none"
-				className="
-					xs:mt-[clamp(11px,3.44vw,12px)]
-					s:mt-[clamp(12px,3.08vw,21px)]
-					xs:w-[clamp(268px,83.75vw,326px)]
-					s:w-[clamp(326px,83.59vw,536px)] h-auto"
-			>
-				<path
-					fill="#202020"
-					stroke="#95C62A"
-					strokeWidth="2"
-					d="m45.533 1.768.27.575L68.139 49.96l.668 1.425h-18.54l-.266-.59-3.446-7.666H22.7l-3.385 7.66-.263.596h-17.5l.642-1.414L23.827 2.354l.267-.586h21.44Zm43.562 0 .296.316 25.022 26.698V1.768h16.849v49.616h-16.215l-.296-.312-25.794-27.235v27.547H72.046V1.768h17.049Zm78.69 0c12.879 0 20.959 3.058 25.819 7.598 4.872 4.55 6.349 10.438 6.349 15.738v1.92c0 5.355-1.231 11.5-5.976 16.296-4.746 4.796-12.827 8.064-26.127 8.064h-27.304V1.768h27.239Zm-9.943 36.16h8.599c7.417 0 11.23-1.777 13.217-3.933 1.994-2.164 2.36-4.93 2.36-7.42v-.383c0-2.382-.377-5.067-2.374-7.177-1.996-2.109-5.816-3.855-13.203-3.855h-8.599v22.768Zm-129.59-7.296h12.731L34.54 16.303l-6.288 14.33ZM263.164 1c12.123 0 19.825 3.401 24.489 8.26 4.653 4.846 6.143 10.996 6.143 16.228v1.92c0 5.166-1.472 11.377-6.111 16.302-4.655 4.94-12.358 8.442-24.521 8.442h-2.88c-12.131 0-19.833-3.502-24.495-8.442-4.646-4.924-6.137-11.133-6.137-16.302v-1.92c0-5.232 1.49-11.382 6.143-16.228C240.459 4.4 248.161 1 260.284 1h2.88Zm88.211.768V15.8h-18.752v35.584h-17.232V15.8h-18.752V1.768h54.736Zm23.873 0v17.216h23.28V1.768h17.296v49.616h-17.296v-18.56h-23.28v18.56h-17.296V1.768h17.296Zm97.461 0v12.944h-30.464v4.912h29.504v13.328h-29.504v5.36h30.848v13.072h-48.016V1.768h47.632ZM261.756 14.904c-6.192 0-9.675 1.677-11.626 3.784-1.965 2.121-2.542 4.858-2.542 7.312v.832c0 2.403.633 5.199 2.641 7.388 1.992 2.17 5.481 3.9 11.527 3.9 6.147 0 9.614-1.733 11.561-3.893 1.966-2.181 2.543-4.974 2.543-7.395V26c0-2.454-.577-5.191-2.535-7.314-1.943-2.106-5.411-3.782-11.569-3.782Zm236.742 7.28h16.983c2.348 0 3.593-.507 4.25-1.102.634-.573.895-1.386.895-2.442v-.128c0-.978-.253-1.74-.88-2.285-.659-.574-1.911-1.067-4.265-1.067h-16.983v7.024Zm41.216 29.2H522.34l-.291-.486c-.199-.331-.319-.776-.397-1.314-.081-.56-.131-1.317-.131-2.336V43.28c0-2.996-.555-4.734-1.647-5.77-1.108-1.051-3.01-1.613-6.312-1.613h-15.064v15.487h-17.296V1.768h36.328c8.995 0 14.303 1.806 17.357 4.552 3.09 2.78 3.675 6.341 3.675 9.312v.576c0 5.635-3.386 9.32-7.831 11.2 1.902.704 3.583 1.695 4.925 3.048 2.109 2.127 3.29 5.05 3.29 8.856v6.208c0 2.95.319 3.548.612 4.007l.156.245v1.612Z"
-				/>
-			</svg>
-
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="640"
-				height="687"
-				fill="none"
-				viewBox="0 0 640 687"
-				className="absolute inset-x-0 bottom-0 z-[12]
-            xs:w-[clamp(320px,100vw,390px)]
-            s:w-[clamp(390px,100vw,640px)]
-            h-auto mx-auto
-            xs:top-[clamp(113px,35.31vw,136px)]
-						s:top-[clamp(136px,34.87vw,223px)]"
-			>
-				<g clipPath="url(#a)">
-					<mask
-						id="b"
-						width="640"
-						height="680"
-						x="0"
-						y="1"
-						maskUnits="userSpaceOnUse"
-					>
-						<path
-							fill="#D9D9D9"
-							d="M5.435 653.858 0 661.497V1h640v658.816l-11.165 9.268-16.748-15.226-5.583 15.226-10.235-15.226-9.304 22.508-12.096-11.916-4.653 16.55-34.426-21.184L522.764 681l-26.983-27.142-6.513 15.226-41.871-28.467v23.833l-41.87-10.592-5.582 15.226h-15.818l-6.513-19.86-15.818 19.86-26.052-15.226-17.679 15.226-8.374-15.226L297.595 681l-12.096-16.55-11.165 11.916v-31.777l-21.4 31.777-23.261-16.55-12.096 16.55-45.592-16.55-12.096 16.55v-16.55h-11.165l-10.235-10.592-13.027 15.226-25.122-15.226-13.026 10.592-11.165-5.958-13.027 15.226-8.374-9.268L38 669.084l8.374-28.467-25.122 28.467-15.817-15.226Z"
-						/>
-					</mask>
-					<g mask="url(#b)">
-						<path
-							fill="#202020"
-							d="M0 1h640v675.301H0V1Z"
-						/>
-					</g>
-					<path
-						stroke="#9ED32B"
-						strokeWidth="2"
-						d="M0 .052h640"
-					/>
-					<path
-						stroke="#9ED32B"
-						strokeWidth="2"
-						d="m0 661.879 5.435-7.639 15.817 15.226L46.374 641 38 669.466l16.748-9.268 8.374 9.268L76.15 654.24l11.165 5.958 13.026-10.592 25.122 15.226 13.027-15.226 10.235 10.592h11.165v16.55l12.096-16.55 45.592 16.55 12.096-16.55 23.261 16.55 21.4-31.776v31.776l11.165-11.916 12.096 16.551 12.096-27.143 8.374 15.226 17.679-15.226 26.052 15.226 15.818-19.86 6.513 19.86h15.818l5.582-15.226 41.87 10.592V641l41.871 28.466 6.513-15.226 26.983 27.143 13.026-21.185 34.426 21.185 4.653-16.551 12.096 11.916 9.304-22.508 10.235 15.226 5.583-15.226 16.748 15.226L640 660.198"
-					/>
-				</g>
-				<defs>
-					<clipPath id="a">
-						<path
-							fill="#fff"
-							d="M0 0h640v687H0z"
-						/>
-					</clipPath>
-				</defs>
-			</svg>
-
-			<MobileMediaSlider files={files} />
-
-			<p className="absolute font-eukraine font-normal leading-[120%] text-white opacity-70
-					xs:top-[clamp(121px,37.81vw,147px)]
-					s:top-[clamp(147px,37.69vw,239px)]
-					xs:right-[clamp(42px,13.13vw,51px)]
-					s:right-[clamp(51px,13.08vw,84px)]
-					xs:text-[clamp(4px,1.25vw,5px)]
-					s:text-[clamp(5px,1.28vw,8px)]
-					xs:h-[clamp(10px,3.13vw,12px)]
-					s:h-[clamp(12px,3.08vw,20px)]
-					xs:max-w-[clamp(86px,26.88vw,104px)]
-					s:max-w-[clamp(104px,26.67vw,170px)] z-[12]"
-			>
-				А все письменные возражения можно отправить в Telegram канал.
+			<p className="relative font-karpaty xl:text-[clamp(100px,10.42vw,200px)] text-[#2F2F2F] mix-blend-multiply leading-none w-max mx-auto z-[2]">
+				СПОГАДИ
 			</p>
 
+			<div className="relative z-10 text-center mb-10">
 
+				<p className="font-quietism xl:text-[clamp(22px,1.56vw,30px)] mb-[100px]">
+					Тут ми згадаємо усі теплі моменти
+				</p>
+			</div>
 
-		</section>);
+			{/* Стек папок */}
+			<div className="relative w-full max-w-[1200px] mx-auto h-[600px] flex justify-center mt-10">
+				{FOLDERS_DATA.map((folder, index) => {
+					const zIndex = FOLDERS_DATA.length - index;
+					const topOffset = -(FOLDERS_DATA.length - 1 - index) * 200;
+
+					// Логіка кольору: якщо це активна папка - помаранчевий, інакше чорний
+					const isActive = activeId === folder.id;
+					const currentColor = isActive ? COLORS.ACTIVE : COLORS.DEFAULT;
+
+					return (
+						<motion.div
+							key={folder.id}
+							layoutId={`folder-container-${folder.id}`}
+							onClick={() => handleFolderClick(folder.id)}
+							className={clsx(
+								"absolute xl:w-[clamp(988.68px,68.66vw,1318.24px)] h-auto cursor-pointer origin-bottom",
+							)}
+							style={{
+								zIndex: zIndex,
+								bottom: `${topOffset}px`,
+							}}
+							initial={false}
+							animate={{
+								y: 0,
+							}}
+							whileHover={{
+								y: -30,
+								transition: { duration: 0.2 }
+							}}
+						>
+							<FolderSVG
+								title={folder.title}
+								color={currentColor} // Передаємо динамічний колір
+								textColor={COLORS.TEXT}
+								tabPosition={folder.tabPosition}
+								className="w-full h-auto drop-shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] transition-colors duration-300"
+							/>
+						</motion.div>
+					);
+				})}
+			</div>
+
+			<Image
+				src="/memory/ticket.png"
+				alt="line"
+				width={500}
+				height={574}
+				className="absolute z-[1] top-[30%] left-[40%]"
+			/>
+
+			{/* Модальне вікно */}
+			<AnimatePresence>
+				{selectedId && selectedFolder && (
+					<div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+							onClick={handleClose}
+						/>
+
+						<motion.div
+							layoutId={`folder-container-${selectedId}`}
+							className="relative w-full max-w-[90vw] h-[85vh] xl:max-w-[1300px] xl:h-[80vh] flex flex-col overflow-hidden isolate"
+						>
+							{/* Фон SVG */}
+							<div className="absolute inset-0 w-full h-full -z-10">
+								<FolderSVG
+									title=""
+									// Коли папка відкрита, вона точно активна, тому колір ACTIVE
+									color={COLORS.ACTIVE}
+									tabPosition={selectedFolder.tabPosition}
+									className="w-full h-full drop-shadow-2xl"
+								/>
+							</div>
+
+							{/* Кнопка закриття */}
+							<button
+								onClick={handleClose}
+								className="absolute top-6 right-8 z-50 w-12 h-12 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center transition-colors"
+							>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+									<path d="M18 6L6 18M6 6L18 18" />
+								</svg>
+							</button>
+
+							{/* Заголовок */}
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.3 }}
+								className={classNames(
+									"relative z-10 pt-10 w-max xl:pt-16 pb-4 text-center",
+									selectedFolder.tabCoordinats
+								)}
+							>
+								<h2 className="font-karpaty text-white text-[clamp(40px,5vw,80px)] uppercase">
+									{selectedFolder.title}
+								</h2>
+							</motion.div>
+
+							{/* Слайдер */}
+							<motion.div
+								className="relative z-10 flex-1 px-4 pb-12 w-full h-full flex items-center justify-center"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ delay: 0.4 }}
+							>
+								<Swiper
+									// 2. Оновлюємо список модулів
+									modules={[Navigation, EffectCards, Keyboard]}
+									effect={'cards'}
+									grabCursor={true}
+									centeredSlides={true}
+									slidesPerView={'auto'}
+									cardsEffect={{
+										rotate: false,
+										perSlideOffset: 15,
+										slideShadows: false,
+									}}
+									navigation={true} // Стрілочки залишаються
+									// 3. Додаємо керування клавіатурою
+									keyboard={{
+										enabled: true,
+										onlyInViewport: true, // Працює тільки коли слайдер у полі зору
+									}}
+									// pagination={{ clickable: true }} // 4. Видалили пагінацію
+									className="w-full max-w-[300px] xl:max-w-[800px] aspect-[4/3] memory-swiper"
+								>
+									{selectedFolder.media.map((file, idx) => (
+										<SwiperSlide key={idx} className="rounded-2xl overflow-hidden bg-black shadow-lg">
+											{file.type === 'video' ? (
+												<video
+													src={file.url}
+													controls
+													className="w-full h-full object-contain"
+												/>
+											) : (
+												<div className="relative w-full h-full">
+													<Image
+														src={file.url}
+														alt="memory"
+														fill
+														className="object-cover"
+													/>
+												</div>
+											)}
+										</SwiperSlide>
+									))}
+								</Swiper>
+							</motion.div>
+						</motion.div>
+					</div>
+				)}
+			</AnimatePresence>
+		</section>
+	);
 };
