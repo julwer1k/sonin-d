@@ -49,7 +49,7 @@ export function CardItem({
 				 Лучше задать явную ширину контейнеру для стабильности. */}
 				<div className="w-[21px] h-auto">
 					<Image
-						src="/family/clothespin.png"
+						src="/family/clothespin.webp"
 						alt="pin"
 						width={21}
 						height={87}

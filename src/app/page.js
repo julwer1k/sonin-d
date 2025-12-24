@@ -15,9 +15,9 @@ export default function Home() {
 				<Hero />
 				<Greeting />
 				<Memory />
-				<div className="relative w-full xl:h-[clamp(232px,16.11vw,314px)]">
+				<div className="relative z-[2] w-full xl:h-[clamp(232px,16.11vw,314px)]">
 					<Image
-						src="/separator.png"
+						src="/separator.webp"
 						alt="Separator"
 						fill
 						className="object-cover"

@@ -14,7 +14,7 @@ export default function Family() {
 				 Убрали z-index, он тут не нужен, картинка и так первая.
 				 */}
 				<Image
-					src="/family/bg.png"
+					src="/family/bg.webp"
 					alt="Background"
 					width={1920}
 					height={1555}

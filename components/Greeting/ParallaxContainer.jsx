@@ -11,7 +11,7 @@ export default function ParallaxContainer({
 	blocks = [],
 	className = '',
 	onHoverChange,
-	videoActive,
+	activeMedia,
 }) {
 	const ref = React.useRef(null);
 
@@ -56,7 +56,7 @@ export default function ParallaxContainer({
 						totalLines={totalLines}
 						scrollProgress={scrollYProgress}
 						onHoverChange={onHoverChange}
-						videoActive={videoActive}
+						activeMedia={activeMedia}
 					/>
 				);
 			})}

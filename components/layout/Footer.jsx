@@ -12,7 +12,7 @@ export function Footer() {
 			{/* ФОНОВАЯ КАРТИНКА */}
 			<div className="absolute inset-0 w-full h-full">
 				<Image
-					src="/footer/footer-bg.jpg"
+					src="/footer/footer-bg.webp"
 					alt="Footer Background"
 					fill
 					className="object-cover object-center"

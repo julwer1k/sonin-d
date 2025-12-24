@@ -31,28 +31,28 @@ const DigitalClock = () => {
 const TICKETS = [
 	{
 		id: 1,
-		path: '/ticket/ticket-1.png',
+		path: '/ticket/ticket-1.webp',
 		alt: 'Popcorn Ticket',
 		// Данные для бейджа
-		popImage: '/ticket/image-1.png', // Твоя картинка попкорна (без фона)
+		popImage: '/ticket/image-1.webp', // Твоя картинка попкорна (без фона)
 		bgColor: '#FFC067', // Оранжевый
 		badgePosition: "absolute top-[35.5%] rotate-[6deg] right-[4%]",
 		runningText: 'EARLY-EVENING SPECIAL # EVERY MONDAY & TUESDAY & WENSDAY &'
 	},
 	{
 		id: 2,
-		path: '/ticket/ticket-2.png',
+		path: '/ticket/ticket-2.webp',
 		alt: 'Cocktail Ticket',
-		popImage: '/ticket/image-2.png',
+		popImage: '/ticket/image-2.webp',
 		badgePosition: "absolute top-[17%] rotate-[-3deg] right-[4%]",
 		bgColor: '#ED8781', // Розовый
 		runningText: 'SUMMER VIBES ONLY # FRESH DRINKS & GOOD TIMES &'
 	},
 	{
 		id: 3,
-		path: '/ticket/ticket-3.png',
+		path: '/ticket/ticket-3.webp',
 		alt: 'Snowboard Ticket',
-		popImage: '/ticket/image-3.png',
+		popImage: '/ticket/image-3.webp',
 		bgColor: '#86BADA', // Голубой
 		badgePosition: "absolute top-[10%] rotate-[-14deg] right-[5%]",
 		runningText: 'WINTER SEASON PASS # SNOWBOARDING & SKIING &'
@@ -73,7 +73,7 @@ export const Ticket = () => {
 
 			<div className="absolute bottom-[-200px] left-0 w-full h-[774px] z-[5] pointer-events-none">
 				<Image
-					src="/ticket/background-2.png"
+					src="/ticket/background-2.webp"
 					alt="Top Decoration"
 					width={1920}
 					height={774}
@@ -86,7 +86,7 @@ export const Ticket = () => {
 				{/* --- ТАБЛО (Top Decor) --- */}
 				<div className="relative w-full max-w-[1200px] xl:h-[clamp(320px,22.22vw,426px)] mb-[50px]">
 					<Image
-						src="/ticket/top-element.png"
+						src="/ticket/top-element.webp"
 						alt="Top Decoration"
 						fill
 						className="object-contain object-top"

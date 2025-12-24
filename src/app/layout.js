@@ -56,7 +56,7 @@ export const quetismFont = localFont({
 })
 
 export const metadata = {
-  title: 'Dasha Happy Birthday',
+  title: "З Днем Народження",
   description: '',
   icons: {
     icon: '/favicon.ico',

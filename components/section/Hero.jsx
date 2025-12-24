@@ -1,6 +1,5 @@
 'use client';
 
-import { Header } from '@components/layout/Header';
 import Image from 'next/image';
 import React from 'react';
 
@@ -23,7 +22,7 @@ export const Hero = () => {
 			 */}
 			<div className="absolute top-0 right-0 w-1/2 h-full z-10">
 				<Image
-					src="/hero/background.png" // Твой путь к фото
+					src="/hero/background.webp" // Твой путь к фото
 					alt="Hero Father"
 					fill
 					priority
@@ -56,7 +55,7 @@ export const Hero = () => {
           31.12
         </span>
 				<span className="font-eukraine font-bold text-[clamp(16px,1.5vw,24px)] text-[#2F2F2F] ">
-          1974
+          1975
         </span>
 			</div>
 

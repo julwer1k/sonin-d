@@ -6,7 +6,7 @@ export default function ParallaxBlock({
 	totalLines,
 	scrollProgress,
 	onHoverChange,
-	videoActive,
+	activeMedia,
 }) {
 	return (
 		<div
@@ -20,7 +20,7 @@ export default function ParallaxBlock({
 					totalLines={totalLines}
 					parentProgress={scrollProgress}
 					onHoverChange={onHoverChange}
-					videoActive={videoActive}
+					activeMedia={activeMedia}
 				/>
 			))}
 		</div>
