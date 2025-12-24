@@ -54,7 +54,7 @@ export const Greeting = () => {
 				{
 					segments: [
 						{ type: 'text', content: 'І ГОЛОВНИЙ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ГЕРОЙ', media: { type: 'image', src: '/greeting/photo-6.webp' }, visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(277.5px,19.27vw,370px)]' },
+						{ type: 'button', content: 'ГЕРОЙ', media: { type: 'image', src: '/greeting/image-6.webp' }, visibleOn: ['mobile', 'desktop'], classnames: 'xl:mr-[clamp(277.5px,19.27vw,370px)]' },
 
 						{ type: 'text', content: 'У НАШІЙ ДОЛІ', visibleOn: ['mobile', 'desktop'] },
 					],
@@ -62,7 +62,7 @@ export const Greeting = () => {
 				{
 					segments: [
 						{ type: 'text', content: 'МИ БУДЕМО', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(143.25px,9.95vw,191px)] xl:mr-[clamp(262.5px,18.23vw,350px)]' },
-						{ type: 'button', content: 'ПОРУЧ', media: { type: 'image', src: '/greeting/photo-7.webp' }, visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ПОРУЧ', media: { type: 'image', src: '/greeting/image-7.webp' }, visibleOn: ['mobile', 'desktop'] },
 						{ type: 'text', content: 'З ТОБОЮ ЙТИ', visibleOn: ['mobile', 'desktop'] },
 					],
 				},
@@ -70,7 +70,7 @@ export const Greeting = () => {
 					segments: [
 						{ type: 'text', content: 'БО НАЙКРАЩИЙ ', visibleOn: ['mobile', 'desktop'], classnames: 'xl:ml-[clamp(69.75px,4.84vw,93px)] xl:mr-[clamp(292.5px,20.31vw,390px)]' },
 						{ type: 'text', content: 'У СВІТІ — ЦЕ', visibleOn: ['mobile', 'desktop'] },
-						{ type: 'button', content: 'ТИ', media: { type: 'image', src: '/greeting/photo-7.webp' }, visibleOn: ['mobile', 'desktop'] },
+						{ type: 'button', content: 'ТИ', media: { type: 'image', src: '/greeting/image-8.webp' }, visibleOn: ['mobile', 'desktop'] },
 					],
 				},
 			],
